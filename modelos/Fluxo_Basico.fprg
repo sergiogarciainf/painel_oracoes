@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="User"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2020-07-12 01:21:47 "/>
+        <attribute name="created" value="VXNlcjtERVNLVE9QLVFCNEc5OUc7MjAyMC0wNy0xMjsiMTI6NTI6NTQgIjsyNjQx"/>
+        <attribute name="edited" value="VXNlcjtERVNLVE9QLVFCNEc5OUc7MjAyMC0wNy0xMjsiMDE6MjE6NDcgIjsyOzI3NDY="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <comment text="Inicia a parte do controle e obter inicializa&#231;&#245;es"/>
+            <comment text="Indica que precisa come&#231;ar por aqui"/>
+            <declare name="ComecarAqui" type="Boolean" array="False" size=""/>
+            <assign variable="ComecarAqui" expression="true"/>
+            <if expression="usuarioLogado">
+                <then/>
+                <else>
+                    <comment text="voltar ao login"/>
+                </else>
+            </if>
+            <comment text="obter dados da view"/>
+            <comment text="executar os procedimentos e desvios"/>
+            <comment text="iniciar a view"/>
+            <comment text="usar fezlogin"/>
+            <if expression="usuarioLogado">
+                <then/>
+                <else>
+                    <comment text="voltar ao login"/>
+                </else>
+            </if>
+            <if expression="Existe(ComecarAqui)">
+                <then>
+                    <comment text="redirecionar ao conotrle"/>
+                </then>
+                <else/>
+            </if>
+            <comment text="prcessar a view"/>
+            <comment text="se houver, redirecionar ao controle"/>
+        </body>
+    </function>
+</flowgorithm>

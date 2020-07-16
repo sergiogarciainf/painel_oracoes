@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="User"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2020-07-14 10:09:01 "/>
+        <attribute name="created" value="VXNlcjtERVNLVE9QLVFCNEc5OUc7MjAyMC0wNy0xNDsiMTA6MDU6MDMgIjsyNjMz"/>
+        <attribute name="edited" value="VXNlcjtERVNLVE9QLVFCNEc5OUc7MjAyMC0wNy0xNDsiMTA6MDk6MDEgIjsxOzI3NDM="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <comment text="gerar token usando credentials"/>
+            <if expression="ret200">
+                <then>
+                    <comment text="pegar no e-mail o token"/>
+                    <comment text="fazer autenticacao com o pin"/>
+                </then>
+                <else/>
+            </if>
+        </body>
+    </function>
+</flowgorithm>

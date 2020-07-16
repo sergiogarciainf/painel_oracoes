@@ -1,0 +1,72 @@
+Fontes
+=======================================
+-----------Ajuda---------
+----------------------------------------------------
+instituicao
+----------------------------------------------------
+Campos para o Form.
+ed_instituicao_idinstituicao
+ed_instituicao_denomicacao
+ed_instituicao_nome
+ed_instituicao_nome_contato
+ed_instituicao_email
+ed_instituicao_senha
+ed_instituicao_telefone
+ed_instituicao_nivel_seguranca
+ed_instituicao_nome_pdf
+-----------------
+require_once("entidades/uEntInstituicao.php");
+require_once("dao/uDaoInstituicao.php");
+
+$this->ed_instituicao_idinstituicao->Text='';
+$this->ed_instituicao_denomicacao->Text='';
+$this->ed_instituicao_nome->Text='';
+$this->ed_instituicao_nome_contato->Text='';
+$this->ed_instituicao_email->Text='';
+$this->ed_instituicao_senha->Text='';
+$this->ed_instituicao_telefone->Text='';
+$this->ed_instituicao_nivel_seguranca->Text='';
+$this->ed_instituicao_nome_pdf->Text='';
+-----------------
+$entInstituicao=new EntInstituicao();
+$daoInstituicao=new DaoInstituicao();
+
+$p=array();$p[0]=$_REQUEST['???'];
+   $listaEntidade = $daoInstituicao->listar('where ???=?',$p );
+   if($listaEntidade != null)
+   {
+      $x=$listaEntidade[0]->getxxxxx();
+   }
+
+$this->ed_instituicao_idinstituicao->Text=$entInstituicao->getidinstituicao();
+$this->ed_instituicao_denomicacao->Text=$entInstituicao->getdenomicacao();
+$this->ed_instituicao_nome->Text=$entInstituicao->getnome();
+$this->ed_instituicao_nome_contato->Text=$entInstituicao->getnome_contato();
+$this->ed_instituicao_email->Text=$entInstituicao->getemail();
+$this->ed_instituicao_senha->Text=$entInstituicao->getsenha();
+$this->ed_instituicao_telefone->Text=$entInstituicao->gettelefone();
+$this->ed_instituicao_nivel_seguranca->Text=$entInstituicao->getnivel_seguranca();
+$this->ed_instituicao_nome_pdf->Text=$entInstituicao->getnome_pdf();
+
+$entInstituicao->setidinstituicao($this->ed_instituicao_idinstituicao->Text);
+$entInstituicao->setdenomicacao($this->ed_instituicao_denomicacao->Text);
+$entInstituicao->setnome($this->ed_instituicao_nome->Text);
+$entInstituicao->setnome_contato($this->ed_instituicao_nome_contato->Text);
+$entInstituicao->setemail($this->ed_instituicao_email->Text);
+$entInstituicao->setsenha($this->ed_instituicao_senha->Text);
+$entInstituicao->settelefone($this->ed_instituicao_telefone->Text);
+$entInstituicao->setnivel_seguranca($this->ed_instituicao_nivel_seguranca->Text);
+$entInstituicao->setnome_pdf($this->ed_instituicao_nome_pdf->Text);
+-----------------
+ListaCombo
+$this->ed_instituicao_idinstituicao->Items = ListaCombo::gerarLista('ed_instituicao_idinstituicao', 'SELECT idinstituicao id, descricao descricao FROM instituicao' );
+$this->ed_instituicao_idinstituicao->ItemIndex = ListaCombo::obterItemIndex('ed_instituicao_idinstituicao', $entMembro->getidinstituicao);
+if ($this->ed_instituicao_idinstituicao->ItemIndex>=0) $entMembro->setidinstituicao(ListaCombo::obterId('ed_instituicao_idinstituicao', $this->ed_instituicao_idinstituicao->ItemIndex));
+-----------------
+$listaEntidade= $daoInstituicao->lista($cond);
+$okIncluir=$daoInstituicao->incluir($entInstituicao);
+$okEncontrar=$daoInstituicao->buscarId($entInstituicao);
+$ok=$daoInstituicao->buscarPrimeiro($campo,  $valorAEncontrar,$entInstituicao);
+$listaEntidades=$daoInstituicao->listar($complSql, $parametros);
+$ok=$daoInstituicao->atualizar($entInstituicao);
+$ok=$daoInstituicao->excluir($entInstituicao);

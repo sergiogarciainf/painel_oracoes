@@ -1,0 +1,68 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+$comecaAqui = True;
+require_once '../entidades/uEntNotificacao.php';
+require_once '../dao/uDaoNotificacao.php';
+require_once '../util/geral.php';
+require_once '../util/lista.php';
+require_once '../pdo_engine/uEngine.php';
+error_reporting(0);
+$idinstituicao=fezlogin('idinstituicao', "login.php");
+$entNotificacao = new EntNotificacao();
+$daoNotificacao = new DaoNotificacao();
+iniciarSessao();
+# Verifica se existe id da notificação vindo da view
+$id = "1";
+if (isset($_GET['idnotificacao']))
+    $id=$_GET['idnotificacao'];
+$notificacaos = $daoNotificacao->listarQuery('select * from notificacao where idnotificacao=' . $id, null);
+if (isset($notificacaos[0])) {
+    # registrar na sessao id
+    $entNotificacao = $notificacaos[0];
+    $_SESSION['entNotificacao'] = serialize($entNotificacao);
+}
+
+# verifica se existe id da sessao
+$existeIdSessao = isset($_SESSION['entNotificacao']);
+if ($existeIdSessao) {
+    # povoar com dados post
+    $entNotificacao = unserialize($_SESSION['entNotificacao']);
+    $entNotificacao->setdata_inicial($_POST['data_inicial']);
+    $entNotificacao->setdescricao($_POST['descricao']);
+    $entNotificacao->setdata_final($_POST['data_final']);
+    //$entNotificacao->setidinstituicao($_POST['idinstituicao']);
+    $entNotificacao->setidinstituicao($idinstituicao);
+    # ver se foi apertado botao alterar
+    //if($pag = filter_input(INPUT_GET , 'pag'))
+    $foiapertado = isset($_POST['butn_modificar']);
+    if ($foiapertado) {
+        # altere os dados
+        $op = $daoNotificacao->atualizar($entNotificacao);
+    }
+//butn_remover
+    $foiapertado = isset($_POST['butn_remover']);
+    if ($foiapertado) {
+
+        # excluir os dados
+        $op = $daoNotificacao->excluir($entNotificacao);
+    }
+    # ver se foi apertado botao adicionar
+    $foiapertado = isset($_POST['butn_adicionar']);
+    if ($foiapertado) {
+        # excluir os dados
+        $entNotificacao->setidnotificacao(null);
+        $op = $daoNotificacao->incluir($entNotificacao);
+    }
+}
+$notificacaos_lista = $daoNotificacao->listarQuery('select * from notificacao', null);
+require_once './fmnotificacoes.html.php';
+
+
+
+

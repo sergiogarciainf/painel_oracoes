@@ -1,0 +1,37 @@
+------- No controle ---------
+require_once '../negocios/Ng^Tj.php';
+require_once '../util/geral.php';
+$comeca_aqui=true;
+iniciarSessao();
+$idinstituicao=fezlogin('idinstituicao', "login.php");
+$ng^Tj=new Ng^Tj();
+$lista^Tjs=$ng^Tj->listar^Tj('where idinstituicao='.$idinstituicao);
+require_once '-[arquito controle]-.html.php';
+
+----------------- Na view -----------------------
+require_once '../util/geral.php';
+if (!isset($comeca_aqui))
+{
+    redir('login.php');
+}
+if (!isset($lista^Tjs)) {
+    redir('login.php');
+}
+$ent = $lista^Tjs[0];
+//Ajuda a estabelecer os elemento da classe
+require_once '../entidades/uEnt^Tj.php';
+$ent=new Ent^Tj();
+
+
+---- na lista -------
+ <?php
+                if ($lista^Tjs != null) {
+                    foreach ($lista^Tjs as $ent) {
+                        ?>
+<tr>
+....
+</tr>
+  <?php
+                    }
+                }
+                ?>        

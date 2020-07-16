@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Win">
+  <TITLE>Untitled Document</TITLE>
+</HEAD>
+<BODY>
+
+<FORM ACTION="login.php" METHOD="POST" ENCTYPE="x-www-form-urlencoded">
+<P><CENTER><FONT SIZE="+3"><HR>Painel de Ora&ccedil;&otilde;es</FONT></CENTER></P>
+
+<P><HR ALIGN=LEFT></P>
+
+<P><CENTER><!--NOEDIT--><?php
+require_once("entidades/uEntInstituicao.php");
+require_once("dao/uDaoInstituicao.php");
+//Cpodigo PHP
+if($_REQUEST['Entrar'] == 'Entrar')
+{
+   $entInstituicao = new EntInstituicao();
+   $daoInstituicao = new DaoInstituicao();
+   $p = array();$p[0] = $_REQUEST['login'];
+
+   $lista = $daoInstituicao->listar('where e_mail=?', $p);
+   if($lista != null)
+   {
+      $senha = $lista[0]->getsenha();
+   }
+}
+?><!--/NOEDIT--><TABLE WIDTH="359" BORDER="0" CELLSPACING="2"
+CELLPADDING="0" HEIGHT="145">
+
+  <TR>
+    <TD WIDTH="35%" HEIGHT="33">
+    <P><CENTER>&nbsp;Login</CENTER></TD>
+    <TD WIDTH="65%" HEIGHT="33">
+    <P><CENTER><INPUT NAME="login" TYPE="text" SIZE="25" </CENTER></CENTER></TD>
+  </TR>
+  <TR>
+    <TD WIDTH="35%" HEIGHT="33">
+    <P><CENTER>&nbsp;Senha</CENTER></TD>
+    <TD WIDTH="65%" HEIGHT="33">
+    <P><CENTER>&nbsp;<INPUT NAME="senha" TYPE="password" SIZE="25"></CENTER></TD>
+  </TR>
+  <TR>
+    <TD WIDTH="35%" HEIGHT="35"></TD>
+    <TD WIDTH="65%" HEIGHT="35"></TD>
+  </TR>
+  <TR>
+    <TD WIDTH="35%" HEIGHT="33">
+    <P><CENTER>&nbsp;<INPUT NAME="Entrar" TYPE="submit" VALUE="Entrar"></CENTER></TD>
+    <TD WIDTH="65%" HEIGHT="33">
+    <P><CENTER>&nbsp;<INPUT NAME="RecuperarSenha" TYPE="submit"
+    VALUE="Recuperar Senha"></CENTER></TD>
+  </TR>
+</TABLE></CENTER></FORM>
+
+</BODY>
+</HTML>

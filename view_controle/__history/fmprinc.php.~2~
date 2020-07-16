@@ -1,0 +1,18 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+require_once '../negocios/NgCelula.php';
+require_once '../util/geral.php';
+iniciarSessao();
+$idinstituicao=$_SESSION['idinstituicao'];
+
+$ngCelula=new NgCelula();
+$listaCelulas=$ngCelula->listarCelular('where idinstituicao='.$idinstituicao);
+$c=count($listaCelulas);die($c);
+$_SESSION['lista']=$listaCelulas;
+require_once 'fmprinc.html.php';

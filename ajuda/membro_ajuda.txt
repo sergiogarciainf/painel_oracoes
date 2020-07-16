@@ -1,0 +1,65 @@
+Fontes
+=======================================
+-----------Ajuda---------
+----------------------------------------------------
+membro
+----------------------------------------------------
+Campos para o Form.
+ed_membro_idmembro
+ed_membro_idcelula
+ed_membro_idfuncao_celula
+ed_membro_idstatus_membro
+ed_membro_nome
+ed_membro_celular
+ed_membro_e_mail
+ed_membro_senha
+ed_membro_isalterar_senha
+-----------------
+require_once("entidades/uEntMembro.php");
+require_once("dao/uDaoMembro.php");
+
+$this->ed_membro_idmembro->Text='';
+$this->ed_membro_idcelula->Text='';
+$this->ed_membro_idfuncao_celula->Text='';
+$this->ed_membro_idstatus_membro->Text='';
+$this->ed_membro_nome->Text='';
+$this->ed_membro_celular->Text='';
+$this->ed_membro_e_mail->Text='';
+$this->ed_membro_senha->Text='';
+$this->ed_membro_isalterar_senha->Text='';
+-----------------
+$entMembro=new EntMembro();
+$daoMembro=new DaoMembro();
+
+$this->ed_membro_idmembro->Text=$entMembro->getidmembro();
+$this->ed_membro_idcelula->Text=$entMembro->getidcelula();
+$this->ed_membro_idfuncao_celula->Text=$entMembro->getidfuncao_celula();
+$this->ed_membro_idstatus_membro->Text=$entMembro->getidstatus_membro();
+$this->ed_membro_nome->Text=$entMembro->getnome();
+$this->ed_membro_celular->Text=$entMembro->getcelular();
+$this->ed_membro_e_mail->Text=$entMembro->gete_mail();
+$this->ed_membro_senha->Text=$entMembro->getsenha();
+$this->ed_membro_isalterar_senha->Text=$entMembro->getisalterar_senha();
+
+$entMembro->setidmembro($this->ed_membro_idmembro->Text);
+$entMembro->setidcelula($this->ed_membro_idcelula->Text);
+$entMembro->setidfuncao_celula($this->ed_membro_idfuncao_celula->Text);
+$entMembro->setidstatus_membro($this->ed_membro_idstatus_membro->Text);
+$entMembro->setnome($this->ed_membro_nome->Text);
+$entMembro->setcelular($this->ed_membro_celular->Text);
+$entMembro->sete_mail($this->ed_membro_e_mail->Text);
+$entMembro->setsenha($this->ed_membro_senha->Text);
+$entMembro->setisalterar_senha($this->ed_membro_isalterar_senha->Text);
+-----------------
+ListaCombo
+$this->ed_membro_idmembro->Items = ListaCombo::gerarLista('ed_membro_idmembro', 'SELECT idmembro id, descricao descricao FROM membro' );
+$this->ed_membro_idmembro->ItemIndex = ListaCombo::obterItemIndex('ed_membro_idmembro', $entMembro->getidmembro);
+if ($this->ed_membro_idmembro->ItemIndex>=0) $entMembro->setidmembro(ListaCombo::obterId('ed_membro_idmembro', $this->ed_membro_idmembro->ItemIndex));
+-----------------
+$listaEntidade= $daoMembro->lista($cond);
+$okIncluir=$daoMembro->incluir($entMembro);
+$okEncontrar=$daoMembro->buscarId($entMembro);
+$ok=$daoMembro->buscarPrimeiro($campo,  $valorAEncontrar,$entMembro);
+$listaEntidades=$daoMembro->listar($complSql, $parametros);
+$ok=$daoMembro->atualizar($entMembro);
+$ok=$daoMembro->excluir($entMembro);

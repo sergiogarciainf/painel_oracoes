@@ -1,0 +1,76 @@
+Fontes
+=======================================
+-----------Ajuda---------
+----------------------------------------------------
+celula
+----------------------------------------------------
+Campos para o Form.
+ed_celula_idcelula
+ed_celula_idinstituicao
+ed_celula_nome
+ed_celula_endereco
+ed_celula_num
+ed_celula_complemento
+ed_celula_bairro
+ed_celula_cidade
+ed_celula_uf
+ed_celula_cep
+-----------------
+require_once("entidades/uEntCelula.php");
+require_once("dao/uDaoCelula.php");
+
+$this->ed_celula_idcelula->Text='';
+$this->ed_celula_idinstituicao->Text='';
+$this->ed_celula_nome->Text='';
+$this->ed_celula_endereco->Text='';
+$this->ed_celula_num->Text='';
+$this->ed_celula_complemento->Text='';
+$this->ed_celula_bairro->Text='';
+$this->ed_celula_cidade->Text='';
+$this->ed_celula_uf->Text='';
+$this->ed_celula_cep->Text='';
+-----------------
+$entCelula=new EntCelula();
+$daoCelula=new DaoCelula();
+
+$p=array();$p[0]=$_REQUEST['???'];
+   $listaEntidade = $daoCelula->listar('where ???=?',$p );
+   if($listaEntidade != null)
+   {
+      $x=$listaEntidade[0]->getxxxxx();
+   }
+
+$this->ed_celula_idcelula->Text=$entCelula->getidcelula();
+$this->ed_celula_idinstituicao->Text=$entCelula->getidinstituicao();
+$this->ed_celula_nome->Text=$entCelula->getnome();
+$this->ed_celula_endereco->Text=$entCelula->getendereco();
+$this->ed_celula_num->Text=$entCelula->getnum();
+$this->ed_celula_complemento->Text=$entCelula->getcomplemento();
+$this->ed_celula_bairro->Text=$entCelula->getbairro();
+$this->ed_celula_cidade->Text=$entCelula->getcidade();
+$this->ed_celula_uf->Text=$entCelula->getuf();
+$this->ed_celula_cep->Text=$entCelula->getcep();
+
+$entCelula->setidcelula($this->ed_celula_idcelula->Text);
+$entCelula->setidinstituicao($this->ed_celula_idinstituicao->Text);
+$entCelula->setnome($this->ed_celula_nome->Text);
+$entCelula->setendereco($this->ed_celula_endereco->Text);
+$entCelula->setnum($this->ed_celula_num->Text);
+$entCelula->setcomplemento($this->ed_celula_complemento->Text);
+$entCelula->setbairro($this->ed_celula_bairro->Text);
+$entCelula->setcidade($this->ed_celula_cidade->Text);
+$entCelula->setuf($this->ed_celula_uf->Text);
+$entCelula->setcep($this->ed_celula_cep->Text);
+-----------------
+ListaCombo
+$this->ed_celula_idcelula->Items = ListaCombo::gerarLista('ed_celula_idcelula', 'SELECT idcelula id, descricao descricao FROM celula' );
+$this->ed_celula_idcelula->ItemIndex = ListaCombo::obterItemIndex('ed_celula_idcelula', $entMembro->getidcelula);
+if ($this->ed_celula_idcelula->ItemIndex>=0) $entMembro->setidcelula(ListaCombo::obterId('ed_celula_idcelula', $this->ed_celula_idcelula->ItemIndex));
+-----------------
+$listaEntidade= $daoCelula->lista($cond);
+$okIncluir=$daoCelula->incluir($entCelula);
+$okEncontrar=$daoCelula->buscarId($entCelula);
+$ok=$daoCelula->buscarPrimeiro($campo,  $valorAEncontrar,$entCelula);
+$listaEntidades=$daoCelula->listar($complSql, $parametros);
+$ok=$daoCelula->atualizar($entCelula);
+$ok=$daoCelula->excluir($entCelula);

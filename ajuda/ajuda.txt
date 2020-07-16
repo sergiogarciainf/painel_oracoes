@@ -1,0 +1,47 @@
+require_once '../entidades/uEnt^Tj.php';
+require_once '../dao/uDao^Tj.php';
+$ent^Tj = new Ent^Tj();
+$dao^Tj = new Dao^Tj();
+$^tas = $dao^Tj->listarQuery('select * from ^ta', null);
+if (isset($^tas[0])) {
+    $ent^Tj = $^tas[0];
+    echo $ent^Tj->get^c();
+}
+//-----------------------
+$p = array();
+$p[1] = 10;
+error_reporting(0);
+$^tas = $dao^Tj->listarQuery('select * from ^ta where id^ta=?', $p);
+if (isset($^tas[0])) {
+    $ent^Tj = $^tas[0];
+    echo $ent^Tj->get^c();
+}
+//---
+$ok = $dao^Tj->atualizar($ent^Tj);
+$ok = $dao^Tj->incluir($ent^Tj);
+$ok = $dao^Tj->excluir($ent^Tj);
+
+//--------------------------------- Buscas pela Engine
+
+require_once '../pdo_engine/uEngine.php';
+
+$rs = Engine::preparar($sql);
+if ($parametros != null) {
+    $ps = 1;
+    foreach ($parametros as $value) {
+        $rs->bindParam($ps, trim($value));
+        $ps++;
+    }
+}
+
+$retorno = null;
+if (Engine::executar($rs)) {
+    while ($row = $rs->fetch(PDO::FETCH_OBJ)) {
+        if ($retorno == null)
+            $retorno = array();
+        $^c = $row->^c;
+    }
+}
+
+
+

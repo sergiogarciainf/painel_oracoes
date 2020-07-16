@@ -1,0 +1,103 @@
+<HTML>
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Win">
+  <TITLE>Alteração/Exclusão</TITLE>
+</HEAD>
+<BODY>
+
+<FORM>
+<!--NOEDIT--><?php
+//Reupera dados do membro
+            require_once './dao/uDaoMembro.php';
+            require_once './entidades/uEntMembro.php';
+            require_once './util/geral.php';
+            require_once './topo.php';
+            $entMembro = new EntMembro();
+            $daoMembro = new DaoMembro();
+            $idmembro = id_get('idmembro', 'login.php');
+            $_operacao = id_get('_operacao', 'login.php');
+            if ($daoMembro->buscarPrimeiro('idmembro', $idmembro, $entMembro)) {
+                if (isset($_REQUEST['ConfirmarBt'])){
+                    if ($_operacao=='a')
+                    {
+                        $entMembro->setidmembro($entMembro->getidmembro());
+                        $entMembro->setidcelula($entMembro->getidcelula());
+                        $entMembro->setidfuncao_celula($_REQUEST['ed_idfuncao_celula']);
+                        $entMembro->setidstatus_membro($_REQUEST['ed_idstatus_membro']);
+                        $entMembro->setnome($_REQUEST['ed_nome']);
+                        $entMembro->setcelular($_REQUEST['ed_celular']);
+                        $entMembro->sete_mail($_REQUEST['ed_e_mail']);
+                        $entMembro->setsenha($_REQUEST['ed_senha']);
+                        $entMembro->setisalterar_senha($_REQUEST['ed_isalterar_senha']);
+                        $daoMembro->atualizar($entMembro);
+                        header('location:FmListarMembros.php?idcelula='.$entMembro->getidcelula());
+                    }
+                    if ($_operacao=='e')
+                    {
+                        $daoMembro->excluir($entMembro);
+                        header('location:FmListarMembros.php?idcelula='.$entMembro->getidcelula());
+                    }
+
+                }
+                ?>
+                <P><CENTER><TABLE WIDTH="450" BORDER="0" CELLSPACING="2" CELLPADDING="0">
+
+                        <TR>
+                            <TD WIDTH="32%">
+                                &nbsp;IdfuncaoCelula</TD>
+                            <TD WIDTH="68%">
+                                &nbsp;<INPUT NAME="ed_idfuncao_celula" TYPE="text" SIZE="25" VALUE="<?php echo $entMembro->getidfuncao_celula(); ?>"></TD>
+                        </TR>
+                        <TR>
+                            <TD WIDTH="32%">
+                                &nbsp;IdstatusMembro</TD>
+                            <TD WIDTH="68%">
+                                &nbsp;<INPUT NAME="ed_idstatus_membro" TYPE="text" SIZE="25" VALUE="<?php echo $entMembro->getidstatus_membro(); ?>"></TD>
+                        </TR>
+                        <TR>
+                            <TD WIDTH="32%">
+                                &nbsp;Nome</TD>
+                            <TD WIDTH="68%">
+                                &nbsp;<INPUT NAME="ed_nome" TYPE="text" SIZE="25" VALUE="<?php echo $entMembro->getnome(); ?>"></TD>
+                        </TR>
+                        <TR>
+                            <TD WIDTH="32%">
+                                &nbsp;Celular</TD>
+                            <TD WIDTH="68%">
+                                &nbsp;<INPUT NAME="ed_celular" TYPE="text" SIZE="25" VALUE="<?php echo $entMembro->getcelular(); ?>"></TD>
+                        </TR>
+                        <TR>
+                            <TD WIDTH="32%">
+                                &nbsp;EMail</TD>
+                            <TD WIDTH="68%">
+                                &nbsp;<INPUT NAME="ed_e_mail" TYPE="text" SIZE="25" VALUE="<?php echo $entMembro->gete_mail(); ?>"></TD>
+                        </TR>
+                        <TR>
+                            <TD WIDTH="32%">
+                                &nbsp;Senha</TD>
+                            <TD WIDTH="68%">
+                                &nbsp;<INPUT NAME="ed_senha" TYPE="text" SIZE="25" VALUE="<?php echo $entMembro->getsenha(); ?>"></TD>
+                        </TR>
+                        <TR>
+                            <TD WIDTH="32%">
+                                &nbsp;IsalterarSenha</TD>
+                            <TD WIDTH="68%">
+                                &nbsp;<INPUT NAME="ed_isalterar_senha" TYPE="text" SIZE="25" VALUE="<?php echo $entMembro->getisalterar_senha(); ?>"></TD>
+                        </TR>
+                    </TABLE>
+
+    <?php
+}
+?><!--/NOEDIT-->
+
+<P><CENTER><TABLE WIDTH="239" BORDER="0" CELLSPACING="2" CELLPADDING="0">
+  <TR>
+    <TD WIDTH="51%">
+    <P><CENTER>&nbsp;<INPUT NAME="ConfirmarBt" TYPE="submit" VALUE="Confirmar"></CENTER></TD>
+    <TD WIDTH="49%">
+    &nbsp;<INPUT NAME="CancelarBt" TYPE="submit" VALUE="Cancelar"></TD>
+  </TR>
+</TABLE></CENTER></FORM>
+
+</BODY>
+</HTML>
