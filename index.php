@@ -8,5 +8,5 @@
 //echo getcwd() . "<br>";
 //chdir('view_controle');
 //echo getcwd() . "<br>";
-header('location:view_controle/login.php');
+header('location:view_controle/login.php') ;
 
