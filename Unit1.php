@@ -1,0 +1,27 @@
+<?php
+require_once("rpcl/rpcl.inc.php");
+require_once("pdo_engine/uEngine.php");
+//Includes
+use_unit("forms.inc.php");
+use_unit("extctrls.inc.php");
+use_unit("stdctrls.inc.php");
+
+//Class definition
+class Page1 extends Page
+{
+}
+
+global $application;
+
+global $Page1;
+
+//Creates the form
+$Page1=new Page1($application);
+
+//Read from resource file
+$Page1->loadResource(__FILE__);
+
+//Shows the form
+$Page1->show();
+
+?>

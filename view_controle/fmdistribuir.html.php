@@ -1,9 +1,9 @@
-﻿<?php
+﻿﻿<?php
 require_once '../util/geral.php';
 $sessao="instituicao";
 $pglogin="login.php";
-$paginaControle="????";
-fezlogin($sessao, $pglogin);
+$paginaControle="fmdistribuir.php";
+
 if (!isset($comecarAqui)) {
     redir($paginaControle);   
 }?>
@@ -83,8 +83,19 @@ if (!isset($comecarAqui)) {
         </div>
         <label for="butn_29">
           <div style="position:absolute;left:30px;top:82px;width:273px;height:22px;overflow:hidden;">
-            <p class="Body"><span class="C-2">Célula</span></p>
+            <p class="Body"><span class="C-2">Célula </span></p>
           </div>
+                    <select name="cb_celula" class="OBJ-7" __AddCode="here" style="position:absolute;left:29px;top:117px;width:275px;height:22px;/*Add Style*/">
+              <?php
+              foreach ($celulas as $celula) {
+                  $sl= iif($celula->getidcelula()==$idcelula, 'selected=""', '');
+                  ?>
+              <option value="<?php echo $celula->getidcelula();?>" <?php echo $sl;?>><?php echo $celula->getnome();?></option>
+                      <?php
+              }
+              ?>
+	</select>		
+
         </label>
         <input id="butn_29" name="Incluir" class="OBJ-5" type="submit" value="Incluir" style="position:absolute;left:30px;top:158px;width:273px;height:22px;">
         <label for="combo_9">
@@ -92,24 +103,10 @@ if (!isset($comecarAqui)) {
             <p class="Body"><span class="C-2">Lista Células</span></p>
           </div>
         </label>
+        <!--Preamble for Combo Box combo_9-->
+				
         <select id="combo_9" name="cb_listacelulas[]" class="OBJ-6" multiple="" style="position:absolute;left:30px;top:234px;width:273px;height:88px;"></select>
         <input name="Retirar" class="OBJ-5" type="submit" value="Retirar" style="position:absolute;left:30px;top:351px;width:273px;height:22px;">
-        <div style="position:absolute;left:30px;top:114px;width:279px;height:35px;">
-          <select name="cb_celula" class="OBJ-1" style="width:273px;height:22px;">            
-<?php
-foreach ($celulas as $value) {
-    if (!isset($idcelula)) {
-        $idcelula = null;
-    }
-    if ($value->getidcelula() == $idcelula) {
-        echo '<option value="' . $value->getidcelula() . '" selected="">' . $value->getnome() . '</option>';
-    } else {
-        echo '<option value="' . $value->getidcelula() . '">' . $value->getnome() . '</option>';
-    }
-}
-?>
-                    </select>
-        </div>
       </form>
     </div>
   </body>

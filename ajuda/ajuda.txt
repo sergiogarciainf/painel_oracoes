@@ -1,21 +1,20 @@
-require_once '../entidades/uEnt^Tj.php';
+//-----------------------Buscas -----------------
 require_once '../dao/uDao^Tj.php';
-$ent^Tj = new Ent^Tj();
-$dao^Tj = new Dao^Tj();
-$^tas = $dao^Tj->listarQuery('select * from ^ta', null);
-if (isset($^tas[0])) {
-    $ent^Tj = $^tas[0];
-    echo $ent^Tj->get^c();
-}
-//-----------------------
-$p = array();
-$p[1] = 10;
+require_once '../entidades/uEnt^Tj.php';
+require_once '../pdo_engine/uEngine.php';
+...
+$dao^Tj=new Dao^Tj();
+ $ent=new Ent^Tj();
+//$p = array();
+//$p[1] = 10;
+$p=null;
 error_reporting(0);
-$^tas = $dao^Tj->listarQuery('select * from ^ta where id^ta=?', $p);
+$^tas = $dao^Tj->listarQuery('^q', $p);
 if (isset($^tas[0])) {
     $ent^Tj = $^tas[0];
     echo $ent^Tj->get^c();
 }
+
 //---
 $ok = $dao^Tj->atualizar($ent^Tj);
 $ok = $dao^Tj->incluir($ent^Tj);

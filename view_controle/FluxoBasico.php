@@ -30,8 +30,12 @@ class FluxoBasico {
         $comecarAqui = True;
 # obter dados da view
         if ($this->ativarVarredura) {
+# obter dados da view
             foreach ($_REQUEST as $key => $value) {
                 echo ('$' . "_REQUEST['$key']= '$value'; <br>");
+            }
+            foreach ($_SESSION as $key => $value) {
+                echo ('$' . "_SESSION['$key']= '$value'; <br>");
             }
         }
 # executar os procedimentos e desvios
@@ -40,5 +44,6 @@ class FluxoBasico {
     }
 
 }
-$fluxoBasico=new FluxoBasico();
+
+$fluxoBasico = new FluxoBasico();
 $fluxoBasico->iniciar();

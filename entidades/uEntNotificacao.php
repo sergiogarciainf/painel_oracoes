@@ -1,8 +1,10 @@
 <?php
-class EntNotificacao {
+class EntNotificacao
+{
   private $idnotificacao;
   private $data_inicial;
   private $descricao;
+  private $resumo;
   private $data_final;
   private $idinstituicao;
  public function setidnotificacao($v)
@@ -18,6 +20,11 @@ class EntNotificacao {
  public function setdescricao($v)
    {
       $this->descricao = $v;
+   }
+  
+ public function setresumo($v)
+   {
+      $this->resumo = $v;
    }
   
  public function setdata_final($v)
@@ -41,6 +48,10 @@ class EntNotificacao {
  public function getdescricao()
    {
       return $this->descricao;
+   }
+ public function getresumo()
+   {
+      return $this->resumo;
    }
  public function getdata_final()
    {

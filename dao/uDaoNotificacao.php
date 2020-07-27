@@ -30,6 +30,7 @@ class DaoNotificacao
             $ent->setidnotificacao($row->idnotificacao);
             $ent->setdata_inicial($row->data_inicial);
             $ent->setdescricao($row->descricao);
+            $ent->setresumo($row->resumo);
             $ent->setdata_final($row->data_final);
             $ent->setidinstituicao($row->idinstituicao);
             $retorno[] = $ent;
@@ -43,12 +44,14 @@ class DaoNotificacao
       $sql = 'INSERT INTO notificacao (';
       $sql .=  'data_inicial,';
       $sql .=  'descricao,';
+      $sql .=  'resumo,';
       $sql .=  'data_final,';
       $sql .=  'idinstituicao,';
       $sql=substr($sql,0,strlen($sql)-1);
       $sql.=') VALUES (';
       $sql.="?," ;//data_inicial
       $sql.="?," ;//descricao
+      $sql.="?," ;//resumo
       $sql.="?," ;//data_final
       $sql.="?," ;//idinstituicao
       $sql=substr($sql,0,strlen($sql)-1);
@@ -58,6 +61,7 @@ class DaoNotificacao
       $ps=1;
       $rs->bindParam($ps, $e->getdata_inicial());$ps++;
       $rs->bindParam($ps, $e->getdescricao());$ps++;
+      $rs->bindParam($ps, $e->getresumo());$ps++;
       $rs->bindParam($ps, $e->getdata_final());$ps++;
       $rs->bindParam($ps, $e->getidinstituicao());$ps++;
       return Engine::executar($rs);
@@ -81,10 +85,11 @@ class DaoNotificacao
             $e->setidnotificacao($row->idnotificacao);
             $e->setdata_inicial($row->data_inicial);
             $e->setdescricao($row->descricao);
+            $e->setresumo($row->resumo);
             $e->setdata_final($row->data_final);
             $e->setidinstituicao($row->idinstituicao);
             return true;
-		
+
          }
       }
       return false;
@@ -94,6 +99,7 @@ class DaoNotificacao
       $sql = 'update notificacao set ';
       $sql .= 'data_inicial=?, ';
       $sql .= 'descricao=?, ';
+      $sql .= 'resumo=?, ';
       $sql .= 'data_final=?, ';
       $sql .= 'idinstituicao=?, ';
       $sql=substr($sql,0,strlen($sql)-2);
@@ -102,6 +108,7 @@ class DaoNotificacao
       $ps=1;
       $rs->bindParam($ps, $e->getdata_inicial());$ps++;
       $rs->bindParam($ps, $e->getdescricao());$ps++;
+      $rs->bindParam($ps, $e->getresumo());$ps++;
       $rs->bindParam($ps, $e->getdata_final());$ps++;
       $rs->bindParam($ps, $e->getidinstituicao());$ps++;
       $rs->bindParam($ps, $e->getidnotificacao());$ps++;

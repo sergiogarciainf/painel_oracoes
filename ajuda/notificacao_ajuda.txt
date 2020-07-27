@@ -6,6 +6,7 @@ Campos para o Form.
 ed_notificacao_idnotificacao
 ed_notificacao_data_inicial
 ed_notificacao_descricao
+ed_notificacao_resumo
 ed_notificacao_data_final
 ed_notificacao_idinstituicao
 -----------------
@@ -15,6 +16,7 @@ require_once("dao/uDaoNotificacao.php");
 $this->ed_notificacao_idnotificacao->Text='';
 $this->ed_notificacao_data_inicial->Text='';
 $this->ed_notificacao_descricao->Text='';
+$this->ed_notificacao_resumo->Text='';
 $this->ed_notificacao_data_final->Text='';
 $this->ed_notificacao_idinstituicao->Text='';
 -----------------
@@ -24,25 +26,26 @@ $daoNotificacao=new DaoNotificacao();
 $this->ed_notificacao_idnotificacao->Text=$entNotificacao->getidnotificacao();
 $this->ed_notificacao_data_inicial->Text=$entNotificacao->getdata_inicial();
 $this->ed_notificacao_descricao->Text=$entNotificacao->getdescricao();
+$this->ed_notificacao_resumo->Text=$entNotificacao->getresumo();
 $this->ed_notificacao_data_final->Text=$entNotificacao->getdata_final();
 $this->ed_notificacao_idinstituicao->Text=$entNotificacao->getidinstituicao();
 
 $entNotificacao->setidnotificacao($this->ed_notificacao_idnotificacao->Text);
 $entNotificacao->setdata_inicial($this->ed_notificacao_data_inicial->Text);
 $entNotificacao->setdescricao($this->ed_notificacao_descricao->Text);
+$entNotificacao->setresumo($this->ed_notificacao_resumo->Text);
 $entNotificacao->setdata_final($this->ed_notificacao_data_final->Text);
 $entNotificacao->setidinstituicao($this->ed_notificacao_idinstituicao->Text);
------------------
-ListaCombo
-$this->ed_notificacao_idnotificacao->Items = ListaCombo::gerarLista('ed_notificacao_idnotificacao', 'SELECT idnotificacao id, descricao descricao FROM notificacao' );
-$this->ed_notificacao_idnotificacao->ItemIndex = ListaCombo::obterItemIndex('ed_notificacao_idnotificacao', $entMembro->getidnotificacao);
-if ($this->ed_notificacao_idnotificacao->ItemIndex>=0) $entMembro->setidnotificacao(ListaCombo::obterId('ed_notificacao_idnotificacao', $this->ed_notificacao_idnotificacao->ItemIndex));
------------------
-$listaEntidade= $daoNotificacao->lista($cond);
+------------------------------------------
+
 $okIncluir=$daoNotificacao->incluir($entNotificacao);
 $okEncontrar=$daoNotificacao->buscarId($entNotificacao);
 $ok=$daoNotificacao->buscarPrimeiro($campo,  $valorAEncontrar,$entNotificacao);
+
+$parametros=null;
+$cond="where .....";
+//$parametros=array();$parametros[0]=1;
 $listaEntidades=$daoNotificacao->listar($complSql, $parametros);
+
 $ok=$daoNotificacao->atualizar($entNotificacao);
 $ok=$daoNotificacao->excluir($entNotificacao);
-

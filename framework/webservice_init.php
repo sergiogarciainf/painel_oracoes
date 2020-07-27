@@ -32,6 +32,20 @@ function iif($cond, $verdade, $falso)
    return $falso;
 
 }
+function gerarLinhasLista($arr, $var_posicao_lista,$numeroLinhas)
+{
+   $linha = array();
+   for($i = 0; $i < $numeroLinhas; $i++)
+   {
+      $l[$i] = "";
+      if(isset($arr[$var_posicao_lista]))
+      {
+         $l[$i] = $arr[$var_posicao_lista];
+      }
+   }
+   return $l;
+}
+
 function salvarTxt($nmArquivo, $texto)
 {
    $arquivo = fopen($nmArquivo, 'w');

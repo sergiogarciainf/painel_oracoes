@@ -1,0 +1,142 @@
+<?php
+
+class UtilDatas
+{
+
+   public static function data2MySql($dt)
+   {
+      if( ! $dt)
+         return null;
+      $dia = substr($dt, 0, 2);
+      $mes = substr($dt, 3, 2);
+      $ano = substr($dt, 6, 4);
+      return $ano . '-' . $mes . '-' . $dia;
+   }
+
+   public static function mySql2Data($dt)
+   {
+      if( ! $dt)
+         return null;
+      $ano = substr($dt, 0, 4);
+      $mes = substr($dt, 5, 2);
+      $dia = substr($dt, 8, 2);
+      return "$dia/$mes/$ano";
+   }
+
+}
+function separarLinhas($arrObjetos, $posicao_lista, $numElementos)
+{
+   $linha = array();
+   for($i = 0; $i < $numElementos; $i++)
+   {
+      $l[$i] = "";
+      if(isset($arrObjetos[$posicao_lista]))
+      {
+         $l[$i] = $arrObjetos[$posicao_lista];
+      }
+   }
+   return $linhas;
+
+}
+function comboTxt($name, $itens, $selecionado)
+{
+   $saida = '<SELECT NAME="' . $name . '">';
+
+   foreach($itens as $value)
+   {
+      if($value == $selecionado)
+      {
+         $saida .= '<OPTION VALUE="' . $value . '" SELECTED>' . $value;
+      }
+      else
+      {
+         $saida .= '<OPTION VALUE="' . $value . '">' . $value;
+      }
+   }
+   $saida .= '</SELECT>';
+   return $saida;
+}
+function combo($name, $itens, $selecionado)
+{
+   $saida = '<SELECT NAME="' . $name . '">';
+   $n = 1;
+   foreach($itens as $value)
+   {
+      if($n == $selecionado)
+      {
+         $saida .= '<OPTION VALUE="' . $n . '" SELECTED>' . $value;
+      }
+      else
+      {
+         $saida .= '<OPTION VALUE="' . $n . '">' . $value;
+      }
+      $n++;
+   }
+   $saida .= '</SELECT>';
+   return $saida;
+}
+
+function id_get($get, $paginaErro)
+{
+   $id_sessao = 'id_get' . $get;
+   if( ! session_id())
+   {
+      session_start();
+   }
+   if(isset($_REQUEST[$get]))
+   {
+      $_SESSION[$id_sessao] = $_REQUEST[$get];
+   }
+   if( ! isset($_SESSION[$id_sessao]))
+   {
+      header("location:" . $paginaErro);
+   }
+   return $_SESSION[$id_sessao];
+}
+
+function iif($cond, $verdade, $falso)
+{
+   if($cond)
+      return $verdade;
+   return $falso;
+}
+
+function salvarTxt($nmArquivo, $texto)
+{
+   $arquivo = fopen($nmArquivo, 'w');
+   if($arquivo == false)
+      die('Não foi possível criar o arquivo.');
+   fwrite($arquivo, $texto);
+   fclose($arquivo);
+}
+
+function fezlogin($sessao, $pglogin)
+{
+   iniciarSessao();
+   //die($_SESSION[$sessao])    ;
+   if( ! isset($_SESSION[$sessao]))
+   {
+      //redir("location:" . $pglogin);
+      header('location:' . $pglogin);
+      return null;
+   }
+   return $_SESSION[$sessao];
+}
+
+function redir($pagina)
+{
+   ?>
+    <script>
+        window.location.href = "<?php echo $pagina;?>";
+    </script>
+   <?php
+}
+
+function iniciarSessao()
+{
+   if( ! session_id())
+   {
+      session_start();
+   }
+}
+?>
