@@ -1,13 +1,14 @@
 [Breakpoints]
-Count=1
-Breakpoint0='view_controle\Unit1.php',31,'',0,'',1
+Count=0
 
 [Watches]
 Groups=1
 group0=Observadores
 
 [Watchgroup_Observadores]
-Count=0
+Count=2
+watch0='$var_posicao_lista',1,0,0,7
+watch1='$var_posicao_lista',1,0,0,7
 
 [OpenFiles]
 Module2=view_controle\Unit1.php
@@ -18,14 +19,16 @@ Module6=framework\webservice_init.php
 Module7=dao\uDaoNotificacao.php
 Module8=ajuda\notificacao_ajuda.txt
 Module9=entidades\uEntNotificacao.php
+Module10=framework\Compoenentes.php
+Module11=framework\listagem.php
 
 [view_controle\Unit1.php]
 Line=0
 Position=0
 
 [view_controle\fmnotificacoes.php]
-Line=86
-Position=43
+Line=0
+Position=0
 
 [util\geral.php]
 Line=0
@@ -51,6 +54,14 @@ Position=0
 Line=0
 Position=0
 
+[framework\Compoenentes.php]
+Line=0
+Position=0
+
+[framework\listagem.php]
+Line=91
+Position=0
+
 [Status]
-OpenModule=view_controle\fmnotificacoes.html.php
+OpenModule=framework\listagem.php
 

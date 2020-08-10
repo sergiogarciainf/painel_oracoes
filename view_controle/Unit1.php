@@ -15,28 +15,28 @@ class Page1 extends Page
    public $Edit1 = null;
    function Button1Click($sender, $params)
    {
-      $daoInstituicao = new DaoInstituicao();
-      $entInstituicao = new EntInstituicao();
-      //$p = array();
-      //$p[1] = 10;
-      error_reporting(0);
-      $instituicaos = $daoInstituicao->listarQuery('select * from instituicao', null);
-      if(!isset($_SESSION['n']))
+      $dataMySql = '04/03/2020';
+      echo "<br>$dataMySql";
+      for($i = 0; $i < 11; $i++)
       {
-         $n = 0;
-         $_SESSION['n'] = $n;
-      }
-      $n = $_SESSION['n'];
-      $this->Edit1->Text = $n;
-      if(isset($instituicaos[$n]))
-      {
-         $entInstituicao = $instituicaos[$n];
-         echo $entInstituicao->getidinstituicao();
-         echo $entInstituicao->getdenomicacao();
-      }
-      $n++;
-      $_SESSION['n'] = $n;
+         echo '<br>substr($dataMySql,' . $i . ',' . $this->Edit1->Text . ')==>' . substr($dataMySql, $i, $this->Edit1->Text);
 
+      }
+
+   }
+   public function dataMySql2Data($dataMySql)
+   {
+      $ano = substr($dataMySql, 0, 4);
+      $mes = substr($dataMySql, 5, 2);
+      $dia = substr($dataMySql, 8, 2);
+      return "$dia/$mes/$ano";
+   }
+   public function data2dataMysql($data)
+   {
+      $dia = substr($dataMySql, 0, 2);
+      $mes = substr($dataMySql, 3, 2);
+      $ano = substr($dataMySql, 6, 4);
+      return "$ano-$mes-$dia";
    }
 }
 

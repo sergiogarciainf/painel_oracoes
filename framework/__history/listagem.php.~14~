@@ -1,0 +1,141 @@
+<?php
+
+class Celula
+{
+
+   private $id;
+   private $conteudo;
+
+   function __construct($id, $conteudo)
+   {
+      $this->id = $id;
+      $this->conteudo = $conteudo;
+   }
+
+   public function getId()
+   {
+      return $this->id;
+   }
+
+   public function getConteudo()
+   {
+      return $this->conteudo;
+   }
+
+}
+
+class Coluna
+{
+
+   private $titulo;
+   private $tamPerc;
+
+   function __construct($titulo, $tamPerc)
+   {
+      $this->titulo = $titulo;
+      $this->tamPerc = $tamPerc;
+   }
+
+   public function getTitulo()
+   {
+      return $this->titulo;
+   }
+
+   public function getTam()
+   {
+      return $this->tamPerc;
+   }
+
+}
+
+class Listagem
+{
+
+   function view($colunas, $celulas, $pagina, $lagura)
+   {
+      ?>
+        <FORM ACTION="<?php echo $pagina;?>"  METHOD="POST">
+            <P ALIGN=CENTER>&nbsp;</P>
+
+            <P ALIGN=CENTER>&nbsp;</P>
+
+            <P ALIGN=CENTER><!--SELECTION--><!--/SELECTION-->&nbsp;</P>
+
+            <P ALIGN=CENTER><TABLE WIDTH="339" BORDER="0" CELLSPACING="2"
+                                   CELLPADDING="0">
+                <TR>
+                    <TD WIDTH="53%">
+                        <P ALIGN=RIGHT>&nbsp;<INPUT NAME="nameEncontrar" TYPE="text" SIZE="25"></TD>
+                    <TD WIDTH="27%">
+                        <INPUT NAME="Encontrar" TYPE="submit" VALUE="Encontrar">
+                    </TD>
+                </TR>
+            </TABLE></P>
+
+        <P ALIGN=CENTER><INPUT NAME="Cadastrar" TYPE="submit" VALUE="Cadastrar"></P>
+
+        <P ALIGN=CENTER><TABLE WIDTH="<?php echo $lagura;?>" BORDER="0" CELLSPACING="0"
+                               CELLPADDING="0">
+            <TR>
+      <?php
+      foreach($colunas as $value)
+      {
+         echo '    <TD WIDTH="' . $value->getTam() . '%" BGCOLOR="#cccccc"><B>&nbsp;' . $value->getTitulo() . '</B></TD> ';
+      }
+      ?>
+            </TR>
+      <?php
+      $colorir = false;
+      foreach($celulas as $vcelula)
+      {
+         echo '<TR>';
+         $n = 0;
+         foreach($colunas as $vcoluna)
+         {
+            if($colorir)
+            {
+               echo '<TD WIDTH="' . $vcoluna->getTam() . '% BGCOLOR="#9fff9f"">';
+            }
+            else
+            {
+               echo '<TD WIDTH="' . $vcoluna->getTam() . '%">';
+            }
+            echo '<A HREF="' . $pagina . '?id=' . $vcelula[$n]->getId() . '">&nbsp;' . $vcelula[$n]->getConteudo() . '</A></TD>';
+            $n++;
+         }
+         echo '</TR>';
+         $colorir=!$colorir;
+      }
+      ?>
+
+        </TABLE></P>
+
+        <P ALIGN=CENTER><TABLE WIDTH="450" BORDER="0" CELLSPACING="2"
+                               CELLPADDING="0">
+            <TR>
+                <TD WIDTH="50%">
+                    <P ALIGN=CENTER>&nbsp;<INPUT NAME="Anterior" TYPE="submit" VALUE="Anterior"></TD>
+                <TD WIDTH="50%">
+                    <P ALIGN=CENTER>&nbsp;<INPUT NAME="Proximo" TYPE="submit" VALUE="Proximo"></TD>
+            </TR>
+        </TABLE></FORM>
+
+        </BODY>
+        </HTML>
+
+      <?php
+   }
+
+}
+$colunas = array();
+$colunas[] = new Coluna('Nome', 75);
+$colunas[] = new Coluna('telefone', 25);
+$celula = array();
+$celula[0][0] = new Celula('1', 'Ana');
+$celula[0][1] = new Celula('1', '2222');
+$celula[1][0] = new Celula('2', 'Pedro');
+$celula[1][1] = new Celula('2', '3333');
+$l = new Listagem();
+$l->view($colunas, $celula, 'zzzz.php', 600);
+
+?>

@@ -1,0 +1,45 @@
+<?php
+require_once("rpcl/rpcl.inc.php");
+//Includes
+use_unit("forms.inc.php");
+use_unit("extctrls.inc.php");
+use_unit("stdctrls.inc.php");
+require_once '../dao/uDaoInstituicao.php';
+require_once '../entidades/uEntInstituicao.php';
+require_once '../pdo_engine/uEngine.php';
+
+//Class definition
+class Page1 extends Page
+{
+   public $Button1 = null;
+   public $Edit1 = null;
+   function Button1Click($sender, $params)
+   {
+      $dataMySql = '2020-03-04';
+      echo "<br>$dataMySql";
+      $ano = substr($dataMySql, 0, 4);
+      $mes = substr($dataMySql, 3, 2);
+      $dia = substr($dataMySql, 4, 2);
+      for($i = 0; $i < 8; $i++)
+      {
+         echo '<br>substr($dataMySql,' . $i . ',2)==>' . substr($dataMySql, $i, 2);
+
+      }
+
+   }
+}
+
+global $application;
+
+global $Page1;
+
+//Creates the form
+$Page1 = new Page1($application);
+
+//Read from resource file
+$Page1->loadResource(__FILE__);
+
+//Shows the form
+$Page1->show();
+
+?>

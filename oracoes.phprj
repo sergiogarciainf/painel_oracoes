@@ -39,6 +39,8 @@ Item34=view_controle\login.php
 Item35=view_controle\newEmptyPHP.php
 Item36=x.html
 Item37=ajuda\notificacao_ajuda.txt
+Item38=framework\Compoenentes.php
+Item39=framework\listagem.php
 
 [MainScript]
 Script=

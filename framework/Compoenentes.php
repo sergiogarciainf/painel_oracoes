@@ -41,7 +41,7 @@ class Componentes {
             $linha = ' <SELECT NAME="'.$nome.'" SIZE="'.$size.'">';
         }
 
-        foreach ($array as $key => $value) {
+        foreach ($lista as $key => $value) {
             if ($key == $chaveValor) {
                 $linha .= ' <OPTION VALUE="' . $key . '" SELECTED>' . $value;
             } else {
