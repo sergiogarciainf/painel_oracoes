@@ -24,10 +24,12 @@ class Coluna {
 
     private $titulo;
     private $tamPerc;
+    private $tipoImagem = false;
 
-    function __construct($titulo, $tamPerc) {
+    function __construct($titulo, $tamPerc, $tipoImagem) {
         $this->titulo = $titulo;
         $this->tamPerc = $tamPerc;
+        $this->tipoImagem = $tipoImagem;
     }
 
     public function getTitulo() {
@@ -36,6 +38,10 @@ class Coluna {
 
     public function getTam() {
         return $this->tamPerc;
+    }
+
+    public function getTipoImagem() {
+        return $this->tipoImagem;
     }
 
 }
@@ -47,6 +53,10 @@ class listagemBootstrap {
     private $pagina;
     private $lagura;
     private $posicao;
+
+    public function setBotoes($value) {
+        $this->botoes = $value;
+    }
 
     public function setColunas($valor) {
         $this->colunas = $valor;
@@ -78,6 +88,7 @@ class listagemBootstrap {
         foreach ($this->colunas as $value) {
             $html .= '<TH scope="col">        ' . $value->getTitulo() . '<!--SELECTION--><!--/SELECTION--></TH>';
         }
+
         $htmCabeca = '
 
   <div class="row">
@@ -93,10 +104,19 @@ class listagemBootstrap {
         //Atualizando...
         foreach ($this->celulas as $vcelula) {
             $html = "";
-            $n = 0;
+            $numColuna = 0;
             foreach ($this->colunas as $vcoluna) {
-                $html .= '<TD>         <A HREF="' . $this->pagina . '?id=' . $vcelula[$n]->getId() . '">' . $vcelula[$n]->getConteudo() . '</A></TD>';
+                if ($vcoluna->getTipoImagem()) {
+                    //echo $numColuna .'===>'.$vcelula[$numColuna]->getConteudo()."<----<br>";
+                    $html .= '<TD>         <A HREF="' . $this->pagina . '?id=' . $vcelula[$numColuna]->getId() . '&coluna='.$numColuna.'">'
+                            . '<IMG SRC="' . $vcelula[$numColuna]->getConteudo() . 
+                            '"WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="0"></A></TD>';
+                }else{
+                    $html .= '<TD>         <A HREF="' . $this->pagina . '?id=' . $vcelula[$numColuna]->getId() . '&coluna='.$numColuna.'">' . $vcelula[$numColuna]->getConteudo() . '</A></TD>';
+                }
+                $numColuna++;
             }
+            
             $htmlDetalhe .= '<TR>
         ' . $html . '
       </TR>';

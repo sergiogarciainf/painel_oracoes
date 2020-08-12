@@ -1,22 +1,10 @@
-﻿<!--Page Preamble-->
-<?php
-require_once '../util/geral.php';
-require_once("../framework/Compoenentes.php");
-$sessao="instituicao";
-$pglogin="login.php";
-$paginaControle="fmnotificacoes.php";
-if (!isset($comecarAqui)) {
-    redir($paginaControle);   
-}
-?>
-
-<!--Master A Preamble-->
+﻿<!--Master A Preamble-->
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Notificações</title>
+    <title>Detalhes Notificação</title>
     <meta name="generator" content="Serif WebPlus X7">
     <meta name="viewport" content="width=960">
     <!--Master A Head-->
@@ -51,20 +39,19 @@ if (!isset($comecarAqui)) {
       .OBJ-3.Inline { display:inline-block;position:relative;line-height:normal; }
       .OBJ-3 span,.OBJ-3:link span,.OBJ-3:visited span { color:#595959;font-family:"Trebuchet MS",sans-serif;font-weight:normal;text-decoration:none;text-align:center;text-transform:capitalize;font-style:normal;left:3px;top:9px;width:141px;height:17px;font-size:11px;display:block;position:absolute;cursor:pointer; }
       .OBJ-3.Disabled span,a:link.OBJ-3.Disabled span,a:visited.OBJ-3.Disabled span,a:hover.OBJ-3.Disabled span,a:active.OBJ-3.Disabled span { color:#cccccc;top:8px;width:142px;height:18px;font-size:13px; }
-      .OBJ-4,.OBJ-4:link,.OBJ-4:visited { background-image:url('wpimages/wpd707cdef_06.png');background-repeat:no-repeat;background-position:0px 0px;text-decoration:none;display:block;position:absolute; }
-      .OBJ-4:hover { background-position:0px -112px; }
-      .OBJ-4:active,a:link.OBJ-4.Activated,a:link.OBJ-4.Down,a:visited.OBJ-4.Activated,a:visited.OBJ-4.Down,.OBJ-4.Activated,.OBJ-4.Down { background-position:0px -56px; }
-      .OBJ-4:focus { outline-style:none; }
-      button.OBJ-4 { background-color:transparent;border:none 0px;padding:0;display:inline-block;cursor:pointer; }
-      button.OBJ-4:disabled { pointer-events:none; }
-      .OBJ-4.Inline { display:inline-block;position:relative;line-height:normal; }
-      .OBJ-4 span,.OBJ-4:link span,.OBJ-4:visited span { color:#ffffff;font-family:Arial,sans-serif;font-weight:bold;text-decoration:none;text-align:center;text-transform:none;font-style:normal;left:6px;top:16px;width:161px;height:25px;font-size:19px;display:block;position:absolute;cursor:pointer; }
-      .OBJ-4.Disabled span,a:link.OBJ-4.Disabled span,a:visited.OBJ-4.Disabled span,a:hover.OBJ-4.Disabled span,a:active.OBJ-4.Disabled span { top:15px; }
+      .OBJ-4 { margin:0; }
+      .OBJ-5 { background:#f0f0f0;font-family:Tahoma;text-align:center;font-size:16px;color:#000000; }
+      .OBJ-6 { border-collapse:collapse;border:none; }
+      .TC-1 { vertical-align:top;padding:1px 4px;border:none; }
+      .C-1 { line-height:18.00px;font-family:"Verdana", sans-serif;font-style:normal;font-weight:normal;color:#000000;background-color:transparent;text-decoration:none;font-variant:normal;font-size:16.0px;vertical-align:0; }
+      .OBJ-7 { background:#ffffff; }
     </style>
     <script type="text/javascript" src="wpscripts/jquery.js"></script>
+    <script type="text/javascript" src="wpscripts/jquery.validate.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
       $("a.ActiveButton").bind({ mousedown:function(){if ( $(this).attr('disabled') === undefined ) $(this).addClass('Activated');}, mouseleave:function(){ if ( $(this).attr('disabled') === undefined ) $(this).removeClass('Activated');}, mouseup:function(){ if ( $(this).attr('disabled') === undefined ) $(this).removeClass('Activated');}});
+      $("#form_15").validate({ onkeyup: false, showErrors: function(errorMap, errorList) { if (errorList.length) alert(errorList[0].message); }, onclick: false, rules: {  }, onfocusout: false, messages: {  } });
       });
     </script>
   </head>
@@ -78,21 +65,53 @@ if (!isset($comecarAqui)) {
         <a href="fmprinc.html.php" id="nav_2_B2" class="OBJ-2 ActiveButton" style="display:block;position:absolute;left:154px;top:23px;width:146px;height:33px;">
           <span>Principal</span>
         </a>
-        <a href="fmnotificacoes.html.php" id="nav_2_B3" class="OBJ-2 ActiveButton Down" style="display:block;position:absolute;left:300px;top:23px;width:146px;height:33px;">
+        <a href="fmnotificacoes.html.php" id="nav_2_B3" class="OBJ-2 ActiveButton" style="display:block;position:absolute;left:300px;top:23px;width:146px;height:33px;">
           <span>Notificações</span>
         </a>
-        <a href="fmdetalhesnotific.html.php" id="nav_2_B4" class="OBJ-3 ActiveButton" style="display:block;position:absolute;left:446px;top:23px;width:146px;height:33px;">
+        <a href="fmdetalhesnotific.html.php" id="nav_2_B4" class="OBJ-3 ActiveButton Down" style="display:block;position:absolute;left:446px;top:23px;width:146px;height:33px;">
           <span>Detalhes&nbsp;Notificação</span>
         </a>
       </div>
-      <div style="position:absolute;left:185px;top:271px;width:642px;height:156px;">
-        <?php
-        $l->view();
-	?>
-      </div>
-      <a href="FmDetalhesNotific.php?op=i" target="_blank" id="btn_2" class="OBJ-4 ActiveButton" style="position:absolute;left:402px;top:207px;width:174px;height:56px;">
-        <span>Novo</span>
-      </a>
+      <form id="form_15" method="post" target="_self" class="OBJ-4" style="position:absolute;left:190px;top:222px;width:570px;height:302px;">
+        <input name="ok" class="OBJ-5" type="submit" value="Confirmar" style="position:absolute;left:149px;top:277px;width:100px;height:22px;">
+        <table border="1" class="OBJ-6" style="position:absolute;left:40px;top:33px;width:500px;height:208px;">
+          <col style="width:249px;">
+          <col style="width:249px;">
+          <tr style="height:39px;">
+            <td class="TC-1">
+              <p class="Table-Body"><span class="C-1">Resumo</span></p>
+            </td>
+            <td class="TC-1">
+              <p class="Table-Body"><span class="C-1"><input name="editresumo" class="OBJ-7" maxlength="32" value="<?php echo $entNotificacao->getresumo();?>" style="float:left;margin:6px;width:229px;height:22px;"></span></p>
+            </td>
+          </tr>
+          <tr style="height:39px;">
+            <td class="TC-1">
+              <p class="Table-Body"><span class="C-1">DataInicial</span></p>
+            </td>
+            <td class="TC-1">
+              <p class="Table-Body"><span class="C-1"><input name="editdata_inicial" class="OBJ-7" maxlength="32" value="<?php echo $entNotificacao->getdata_inicial();?>" style="float:left;margin:6px;width:122px;height:22px;"></span></p>
+            </td>
+          </tr>
+          <tr style="height:39px;">
+            <td class="TC-1">
+              <p class="Table-Body"><span class="C-1">DataFinal</span></p>
+            </td>
+            <td class="TC-1">
+              <p class="Table-Body"><span class="C-1"><input name="editdata_final" class="OBJ-7" maxlength="32" value="<?php echo $entNotificacao->getdata_final();?>" style="float:left;margin:6px;width:122px;height:22px;"></span></p>
+            </td>
+          </tr>
+          <tr style="height:90px;">
+            <td class="TC-1">
+              <p class="Table-Body"><span class="C-1">Descricao</span></p>
+            </td>
+            <td class="TC-1">
+              <p class="Table-Body"><span class="C-1"><textarea name="editdescricao" class="OBJ-7" style="float:left;margin:6px;width:209px;height:70px;"><?php echo $entNotificacao->getdescricao();?></textarea></span></p>
+            </td>
+          </tr>
+        </table>
+        <input name="cancelar" class="OBJ-5" type="submit" value="Cancela" style="position:absolute;left:322px;top:277px;width:100px;height:22px;">
+      </form>
       <table id="nav_2_B3M" data-opacity="90" data-fade="0" data-minwidth="80" data-hOffset="0" data-vOffset="10" data-vAlignment="3" data-xPad="0" data-yPad="10" data-xOffset="0" data-yOffset="0" data-arrow="0" style="visibility:hidden;">
         <tr>
           <td>

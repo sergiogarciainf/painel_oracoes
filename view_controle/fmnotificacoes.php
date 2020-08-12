@@ -15,6 +15,7 @@ require_once '../util/geral.php';
 require_once '../pdo_engine/uEngine.php';
 require_once '../entidades/uEntInstituicao.php';
 require_once '../framework/listagem.php';
+require_once '../negocios/NgInstituicao.php';
 
 class Notificacao {
 
@@ -27,8 +28,7 @@ class Notificacao {
 
     public function iniciar() {
         $this->idSessaoLogin = fezlogin($this->nomeSessaoPrincipal, $this->pglogin);
-        $instituicao = new EntInstituicao();
-        $instituicao = unserialize($this->idSessaoLogin);
+        $instituicao = NgInstituicao::obterInsituicaoSerializacao($this->idSessaoLogin);
         $var_idinstituicao = $instituicao->getidinstituicao();
         if ($this->idSessaoLogin == null)
             return null;
@@ -45,37 +45,33 @@ class Notificacao {
                 echo ('$' . "_SESSION['$key']= '$value'; <br>");
             }
         }
-        $compl = "";
-        if (isset($_REQUEST['encontrar_x'])) {
-            $compl = ' and resumo like \'%' . $_REQUEST['nameEncontrar'] . '%\'';
-        }
-
-
-        if (!isset($_SESSION['posicao_inicial'])) {
-            $_SESSION['posicao_inicial'] = '0';
-        }
-        $posicao = $_SESSION['posicao_inicial'];
-        if (isset($_REQUEST['anterior_x'])) {
-            if ($posicao - 1 >= 0) {
-                $posicao -= 10;
+        /*
+         * Alteracao
+         * $_REQUEST['id']= '1'; $_REQUEST['coluna']= '1';
+         */
+        if (isset($_REQUEST['coluna'])) {
+            if ($_REQUEST['coluna'] == 1) {
+                redir('FmDetalhesNotific.php?id='.$_REQUEST['id'].'&op=a');
+            }
+            if ($_REQUEST['coluna'] == 2) {
+                echo "Exclusão no id " . $_REQUEST['id'];
+                redir('FmDetalhesNotific.php?id='.$_REQUEST['id'].'&op=e');
             }
         }
-        if (isset($_REQUEST['proxima_x'])) {
-            $posicao += 10;
-        }
-        $_SESSION['posicao_inicial'] = $posicao;
-        $sql='SELECT * FROM notificacao notificacao WHERE notificacao.idinstituicao=' . $var_idinstituicao .$compl. ' Limit ' . $posicao . ' ,10';
-        
-        $rs = Engine::preparar('SELECT * FROM notificacao notificacao WHERE notificacao.idinstituicao=' . $var_idinstituicao .$compl. ' Limit ' . $posicao . ' ,10');
+        $rs = Engine::preparar('SELECT * FROM notificacao notificacao WHERE notificacao.idinstituicao=' . $var_idinstituicao);
         $colunas = array();
-        $colunas[] = new Coluna('Resumo', 100);
+        $colunas[0] = new Coluna('Resumo', 100, false);
+        $colunas[1] = new Coluna('', 10, true);
+        $colunas[2] = new Coluna('', 10, true);
         $celula = array();
         $n = 0;
         if (Engine::executar($rs)) {
             $ct = 0;
             while ($row = $rs->fetch(PDO::FETCH_OBJ)) {
-                $celula[$n][0] = new Celula($row->idnotificacao, $row->resumo);
-                
+                $id = $row->idnotificacao;
+                $celula[$n][0] = new Celula($id, $row->resumo);
+                $celula[$n][1] = new Celula($id, "../res/confirmar.jpg");
+                $celula[$n][2] = new Celula($id, "../res/excluir.jpg");
                 $n++;
             }
         }
@@ -85,7 +81,7 @@ class Notificacao {
         $l->setColunas($colunas);
         $l->setCelulas($celula);
         $l->setLargura(600);
-        $l->setPosicao($posicao);
+        //$l->setPosicao($posicao);
         $l->setPagina('fmnotificacoes.php');
 
         require_once $this->paginaView;

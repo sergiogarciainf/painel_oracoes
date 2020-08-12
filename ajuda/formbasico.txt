@@ -16,10 +16,10 @@ require_once '../pdo_engine/uEngine.php';
 require_once '../negocios/NgInstituicao.php';
 require_once '../entidades/uEntInstituicao.php';
 
-class FluxoBasico {
+class Frm^Tj {
 
-    //put your code here
-    private $paginaView = "";
+//put your code here
+    private $paginaView = "???.html.php";
     private $pglogin = "login.php";
     private $nomeSessaoPrincipal = "instituicao";
     private $idSessaoLogin;
@@ -29,13 +29,14 @@ class FluxoBasico {
         $this->idSessaoLogin = fezlogin($this->nomeSessaoPrincipal, $this->pglogin);
         $instituicao = NgInstituicao::obterInsituicaoSerializacao($this->idSessaoLogin);
         $var_idinstituicao = $instituicao->getidinstituicao();
-
-        # Inicia a parte do controle e obter inicializações
-        # Indica que precisa começar por aqui
+        if ($this->idSessaoLogin == null)
+            return null;
+# Inicia a parte do controle e obter inicializações
+# Indica que precisa começar por aqui
         $comecarAqui = True;
+
 # obter dados da view
         if ($this->ativarVarredura) {
-# obter dados da view
             foreach ($_REQUEST as $key => $value) {
                 echo ('$' . "_REQUEST['$key']= '$value'; <br>");
             }
@@ -43,12 +44,14 @@ class FluxoBasico {
                 echo ('$' . "_SESSION['$key']= '$value'; <br>");
             }
         }
-# executar os procedimentos e desvios
-        # chamar a view
+
+# chamar a view
+
         require_once $this->paginaView;
     }
 
 }
 
-$fluxoBasico = new FluxoBasico();
-$fluxoBasico->iniciar();
+$frm^tj = new Frm^Tj();
+$notificacao->iniciar();
+

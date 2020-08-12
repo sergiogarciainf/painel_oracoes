@@ -4,7 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Program%20Files/VertrigoServ/www/painel_oracoes/topo.php</file>
+            <file>file:/C:/Program%20Files/VertrigoServ/www/painel_oracoes/view_controle/FluxoBasico.php</file>
             <file>file:/C:/Program%20Files/VertrigoServ/www/painel_oracoes/negocios/NgCelula.php</file>
+            <file>file:/C:/Program%20Files/VertrigoServ/www/painel_oracoes/ajuda/notificacao_ajuda.txt</file>
+            <file>file:/C:/Program%20Files/VertrigoServ/www/painel_oracoes/dao/uDaoNotificacao.php</file>
+            <file>file:/C:/Program%20Files/VertrigoServ/www/painel_oracoes/view_controle/fmnotificacoes.php</file>
+            <file>file:/C:/Program%20Files/VertrigoServ/www/painel_oracoes/view_controle/FmDetalhesNotific.php</file>
         </group>
     </open-files>
 </project-private>

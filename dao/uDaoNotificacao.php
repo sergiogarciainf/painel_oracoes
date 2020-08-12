@@ -112,7 +112,6 @@ class DaoNotificacao
       $rs->bindParam($ps, $e->getdata_final());$ps++;
       $rs->bindParam($ps, $e->getidinstituicao());$ps++;
       $rs->bindParam($ps, $e->getidnotificacao());$ps++;
-
       return Engine::executar($rs);
 
    }

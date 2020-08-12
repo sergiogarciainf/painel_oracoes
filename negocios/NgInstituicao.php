@@ -14,6 +14,11 @@
 class NgInstituicao {
 
     //put your code here
+    public static function obterInsituicaoSerializacao($idSessaoLogin) {
+        $instituicao = new EntInstituicao();
+        $instituicao = unserialize($idSessaoLogin);
+        return $instituicao;
+    }
     public static function autenticar($email, $senha) {
         $p = array();
         $p[0] = $email;

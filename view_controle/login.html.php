@@ -15,6 +15,8 @@ if (!isset($comecarAqui))
     <title>Painel Orações</title>
     <meta name="generator" content="Serif WebPlus X7 (15,0,4,38)">
     <meta name="viewport" content="width=960">
+    <!--Master A Head-->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="wpscripts/wpstyles.css">
     <style type="text/css">
       .OBJ-1,.OBJ-1:link,.OBJ-1:visited { background-image:url('wpimages/wp4f833551_06.png');background-repeat:no-repeat;background-position:0px 0px;text-decoration:none;display:block;position:absolute; }
@@ -93,6 +95,18 @@ if (!isset($comecarAqui))
         <input id="edit_18" name="senha" class="OBJ-5" maxlength="32" type="password" style="position:absolute;left:8px;top:108px;width:317px;height:22px;">
         <input name="Confirmar" class="OBJ-6" type="submit" value="Confirmar" style="position:absolute;left:8px;top:140px;width:317px;height:22px;">
       </form>
+      <table id="nav_2_B3M" data-opacity="90" data-fade="0" data-minwidth="80" data-hOffset="0" data-vOffset="10" data-vAlignment="3" data-xPad="0" data-yPad="10" data-xOffset="0" data-yOffset="0" data-arrow="0" style="visibility:hidden;">
+        <tr>
+          <td>
+            <a title="" href="fmdistribuir.html.php">Distribuir Notificações</a>
+          </td>
+        </tr>
+      </table>
     </div>
+    <script type="text/javascript" src="wpscripts/jsMenu.js"></script>
+    <script type="text/javascript">
+      wpmenustack.setRollovers([['nav_2_B1',''],['nav_2_B2',''],['nav_2_B3','nav_2_B3M',{"m_vertical":true}]]);
+      wpmenustack.setMenus(['nav_2_B3M'],{"m_opacity":90,"m_minwidth":80,"m_hOffset":0,"m_vOffset":10,"m_vAlignment":3,"m_xPad":0,"m_yPad":10,"m_xOffset":0,"m_yOffset":0,"m_arrow":false,"m_menuStyle":{"border":"0px none"},"m_rowStyle":{"border":"0px none"},"m_linkNormalStyle":{"fontSize":"10px","fontFamily":"\"Trebuchet MS\",sans-serif","textAlign":"center","color":"#727272","backgroundColor":"#f4f4f4","fontWeight":"normal","textDecoration":"none","fontStyle":"normal"}});
+    </script>
   </body>
 </html>
